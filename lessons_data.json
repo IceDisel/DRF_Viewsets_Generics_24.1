@@ -1,0 +1,71 @@
+[
+  {
+    "model": "lessons.course",
+    "pk": 1,
+    "fields": {
+      "title": "Основы Python",
+      "preview": "",
+      "description": "Курс предназначен для начинающих программистов и охватывает основные концепции и синтаксис языка Python."
+    }
+  },
+  {
+    "model": "lessons.course",
+    "pk": 2,
+    "fields": {
+      "title": "Введение в Data Science",
+      "preview": "",
+      "description": "Курс знакомит с основами Data Science, включая машинное обучение, искусственный интеллект и работу с большими данными."
+    }
+  },
+  {
+    "model": "lessons.course",
+    "pk": 3,
+    "fields": {
+      "title": "3D-моделирование",
+      "preview": "",
+      "description": "Курс посвящен основам 3D-моделирования, включая работу с основными инструментами и создание собственных 3D-моделей."
+    }
+  },
+  {
+    "model": "lessons.course",
+    "pk": 4,
+    "fields": {
+      "title": "Бизнес-моделирование",
+      "preview": "",
+      "description": "Курс охватывает основы создания и анализа бизнес-моделей, включая использование Business Model Canvas."
+    }
+  },
+  {
+    "model": "lessons.lesson",
+    "pk": 1,
+    "fields": {
+      "title": "Введение в Python",
+      "description": "Урок знакомит с основами языка программирования Python.",
+      "preview": "",
+      "video_url": null,
+      "course": 1
+    }
+  },
+  {
+    "model": "lessons.lesson",
+    "pk": 3,
+    "fields": {
+      "title": "Что такое Data Science?",
+      "description": "Урок вводит в понятие Data Science и его основные компоненты.",
+      "preview": "",
+      "video_url": null,
+      "course": 2
+    }
+  },
+  {
+    "model": "lessons.lesson",
+    "pk": 4,
+    "fields": {
+      "title": "Основные типы данных в Python",
+      "description": "Урок рассказывает о базовых типах данных в Python.",
+      "preview": "",
+      "video_url": null,
+      "course": 1
+    }
+  }
+]

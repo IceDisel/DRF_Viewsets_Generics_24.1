@@ -1,0 +1,110 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$3ixkFEHLAnHS8uZtAPcpSs$NY/qFrfZCzc1P9biB4k9coP1hYF32f/4DYd8g1Adb3c=",
+      "last_login": "2024-05-29T13:52:57.857Z",
+      "is_superuser": true,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-05-29T13:52:16.450Z",
+      "email": "admin@admin.com",
+      "phone": null,
+      "avatar": "",
+      "city": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+      "password": "123",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-05-29T13:57:09Z",
+      "email": "user1@mail.com",
+      "phone": null,
+      "avatar": "",
+      "city": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+      "password": "123",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-05-29T13:58:08Z",
+      "email": "user2@mail.com",
+      "phone": null,
+      "avatar": "",
+      "city": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 1,
+    "fields": {
+      "user": 2,
+      "pay_date": "2024-05-20",
+      "pay_course": 1,
+      "pay_lesson": null,
+      "money": 10999,
+      "pay_method": "transfer"
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 2,
+    "fields": {
+      "user": 3,
+      "pay_date": "2024-05-20",
+      "pay_course": null,
+      "pay_lesson": 3,
+      "money": 999,
+      "pay_method": "cash"
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 3,
+    "fields": {
+      "user": 2,
+      "pay_date": "2024-05-21",
+      "pay_course": 3,
+      "pay_lesson": null,
+      "money": 15998,
+      "pay_method": "cash"
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 4,
+    "fields": {
+      "user": 3,
+      "pay_date": "2024-05-22",
+      "pay_course": 4,
+      "pay_lesson": null,
+      "money": 17590,
+      "pay_method": "cash"
+    }
+  }
+]
