@@ -1,13 +1,18 @@
 from rest_framework import generics, viewsets
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from lessons.models import Course, Lesson, Subscription
+from lessons.models import Course, Lesson, Subscription, CoursePayment
 from lessons.paginators import CustomPagination
 from lessons.serializers import CourseDetailSerializers, CourseSerializers, LessonSerializers
+from lessons.services import get_session
 from users.permissions import IsModer, IsOwner
 from rest_framework import status
+
+from users.serializers import CoursePaymentSerializer
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -76,6 +81,28 @@ class LessonDestroyAPIView(generics.DestroyAPIView):
 class SubscriptionView(APIView):
     permission_classes = [IsAuthenticated]
 
+    @swagger_auto_schema(
+        operation_description="Добавить или удалить подписку на курс",
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'course_id': openapi.Schema(type=openapi.TYPE_INTEGER, description='ID курса')
+            }
+        ),
+        responses={
+            200: openapi.Response(
+                description="Сообщение о результате операции",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'message': openapi.Schema(type=openapi.TYPE_STRING)
+                    }
+                )
+            ),
+            400: "Bad Request",
+            404: "Not Found"
+        }
+    )
     def post(self, request, *args, **kwargs):
         user = request.user
         course_id = request.data.get('course_id')
@@ -91,3 +118,17 @@ class SubscriptionView(APIView):
             message = 'Подписка добавлена'
 
         return Response({"message": message}, status=status.HTTP_200_OK)
+
+
+class CoursePaymentApiView(generics.CreateAPIView):
+    queryset = CoursePayment.objects.all()
+    serializer_class = CoursePaymentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        paid_of_course = serializer.save()
+        payment_link, payment_id = get_session(paid_of_course)
+        paid_of_course.payment_link = payment_link
+        paid_of_course.payment_id = payment_id
+
+        paid_of_course.save()

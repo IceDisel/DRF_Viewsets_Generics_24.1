@@ -47,3 +47,17 @@ class Subscription(models.Model):
 
     def __str__(self):
         return f'{self.user} -> {self.course}'
+
+
+class CoursePayment(models.Model):
+    name = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='Название продукта', **NULLABLE)
+    price_amount = models.CharField(verbose_name='Цена платежа', **NULLABLE)
+    payment_link = models.URLField(max_length=400, verbose_name='Ссылка на оплату', **NULLABLE)
+    payment_id = models.CharField(max_length=255, verbose_name='Идентификатор платежа', **NULLABLE)
+
+    def __str__(self):
+        return self.price_amount
+
+    class Meta:
+        verbose_name = 'Оплата курса'
+        verbose_name_plural = 'Оплата курсов'
