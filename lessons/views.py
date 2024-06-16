@@ -13,17 +13,13 @@ from rest_framework import status
 from users.serializers import CoursePaymentSerializer
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+from lessons.tasks import send_course_update_email
 
 
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializers
     pagination_class = CustomPagination
-
-    # def get_serializer_class(self):
-    #     if self.action == 'retrieve':
-    #         return CourseDetailSerializers
-    #     return CourseSerializers
 
     def get_serializer_context(self):
         context = super().get_serializer_context()
@@ -34,6 +30,11 @@ class CourseViewSet(viewsets.ModelViewSet):
         course = serializer.save()
         course.owner = self.request.user
         course.save()
+
+    def perform_update(self, serializer):
+        instance = serializer.save()
+        # Вызываем асинхронную задачу отправки писем
+        send_course_update_email.delay(instance.id)
 
     def get_permissions(self):
         if self.action == 'create':
